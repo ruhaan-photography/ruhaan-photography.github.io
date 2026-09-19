@@ -408,12 +408,6 @@ a {
     color: rgba(255,255,255,0.9);
 }
 
-.gallery-se*tion .section-heading > p:last-chi*d {
-    color: rgba(255, 255, 255,*0.85);
-}
-
-
-
 
 .section-heading {
     max-width: 700px;
@@ -449,7 +443,6 @@ a {
     transition: all 0.2s ease;
 }
 
-.filter-button:hover,
 .filter-button.active {
     background: var(--accent);
     border-color: var(--accent);

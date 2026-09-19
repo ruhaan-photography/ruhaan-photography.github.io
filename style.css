@@ -372,10 +372,10 @@ a {
     padding: 105px 0;
     background:
         linear-gradient(
-            rgba(0, 0, 0, 0.65),
-            rgba(0, 0, 0, 0.65)
+            rgba(0,0,0,0.45),
+            rgba(0,0,0,0.45)
         ),
-        url("images/20260607_170025.jpg");
+        url("images/DSC_0872.JPG");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -383,9 +383,22 @@ a {
 }
 
 /* Gallery Section Text */
-.gallery-section .section-headin* h2,
-.gallery-section .section-hea*ing p,
-.gallery-section .eyebrow {*    color: #ffffff;
+
+.gallery-section .container {
+    background: rgba(255, 250, 242, 0.92);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 50px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.20);
+    width: min(1100px, calc(100% - 80px));
+}
+
+
+
+.gallery-section .section-heading h2,
+.gallery-section .section-heading p,
+.gallery-section .eyebrow {
+    color: #ffffff;
 }
 
 .gallery-se*tion .section-heading > p:last-chi*d {
@@ -420,12 +433,11 @@ a {
 }
 
 .filter-button {
-    padding: 10p* 17px;
-    background: rgba(255, 2*5, 255, 0.15);
-    backdrop-filter* blur(10px);
-    border: 1px solid*rgba(255, 255, 255, 0.25);
-    bor*er-radius: 999px;
-    color: #ffff*f;
+    padding: 10px 17px;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text);
     cursor: pointer;
 }
 

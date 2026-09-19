@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <meta
         name="description"
@@ -11,14 +15,17 @@
 
     <title>Ruhaan Photography</title>
 
-    style.css
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
     <header class="site-header">
         <div class="container navigation">
-            #homeRuhaan Photography</a>
+
+            <a class="site-logo" href="#home">
+                Ruhaan Photography
+            </a>
 
             <button
                 class="menu-button"
@@ -31,10 +38,11 @@
             </button>
 
             <nav class="navigation-links" id="navigationLinks">
-                #homeHome</a>
-                #galleryGallery</a>
-                #aboutAbout</a>
+                <a href="#home">Home</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#about">About</a>
             </nav>
+
         </div>
     </header>
 
@@ -44,18 +52,25 @@
             <div class="hero-overlay"></div>
 
             <div class="container hero-content">
-                <p class="eyebrow">Miniature Figure Photography</p>
 
-                <h1>Small Figures.<br>Big Adventures.</h1>
+                <p class="eyebrow">
+                    Miniature Figure Photography
+                </p>
+
+                <h1>
+                    Small Figures.<br>
+                    Big Adventures.
+                </h1>
 
                 <p class="hero-description">
                     Creative scenes captured through miniature figures,
                     careful lighting, and imagination.
                 </p>
 
-                #gallery
+                <a class="primary-button" href="#gallery">
                     Explore the Gallery
                 </a>
+
             </div>
         </section>
 
@@ -64,6 +79,7 @@
 
                 <div class="section-heading">
                     <p class="eyebrow">Selected Work</p>
+
                     <h2>Photography Gallery</h2>
 
                     <p>
@@ -123,7 +139,10 @@
                             data-title="The Mountain Explorer"
                             data-description="A miniature adventure scene."
                         >
-                            images/photo-01.jpg
+                            <img
+                                src="images/photo-01.jpg"
+                                alt="Miniature mountain explorer scene"
+                            >
 
                             <span class="image-caption">
                                 <strong>The Mountain Explorer</strong>
@@ -143,7 +162,10 @@
                             data-title="A Quiet Break"
                             data-description="A miniature everyday scene."
                         >
-                            images/photo-02.jpg
+                            <img
+                                src="images/photo-02.jpg"
+                                alt="Miniature quiet break scene"
+                            >
 
                             <span class="image-caption">
                                 <strong>A Quiet Break</strong>
@@ -163,7 +185,10 @@
                             data-title="Brave New World"
                             data-description="A creative miniature composition."
                         >
-                            images/photo-03.jpg
+                            <img
+                                src="images/photo-03.jpg"
+                                alt="Creative miniature scene"
+                            >
 
                             <span class="image-caption">
                                 <strong>Brave New World</strong>
@@ -183,7 +208,10 @@
                             data-title="Into the Wild"
                             data-description="A miniature outdoor adventure."
                         >
-                            images/photo-04.jpg
+                            <img
+                                src="images/photo-04.jpg"
+                                alt="Miniature outdoor adventure scene"
+                            >
 
                             <span class="image-caption">
                                 <strong>Into the Wild</strong>
@@ -203,7 +231,10 @@
                             data-title="The Busy Workshop"
                             data-description="A miniature workshop scene."
                         >
-                            images/photo-05.jpg
+                            <img
+                                src="images/photo-05.jpg"
+                                alt="Miniature workshop scene"
+                            >
 
                             <span class="image-caption">
                                 <strong>The Busy Workshop</strong>
@@ -223,7 +254,10 @@
                             data-title="A Giant Discovery"
                             data-description="A creative miniature discovery."
                         >
-                            images/photo-06.jpg
+                            <img
+                                src="images/photo-06.jpg"
+                                alt="Creative miniature discovery scene"
+                            >
 
                             <span class="image-caption">
                                 <strong>A Giant Discovery</strong>
@@ -246,15 +280,15 @@
 
                 <div class="about-description">
                     <p>
-                        This portfolio celebrates the creativity of miniature
-                        figure photography. Each scene is arranged and
-                        photographed to turn small figures into characters
-                        within a much bigger story.
+                        This portfolio celebrates the creativity of
+                        miniature figure photography. Each scene is
+                        arranged and photographed to turn small figures
+                        into characters within a much bigger story.
                     </p>
 
                     <p>
-                        New photographs and adventures will be added as the
-                        collection grows.
+                        New photographs and adventures will be added as
+                        the collection grows.
                     </p>
                 </div>
 
@@ -265,8 +299,16 @@
 
     <footer class="site-footer">
         <div class="container footer-content">
-            <p>© <span id="currentYear"></span> Ruhaan Photography</p>
-            <p>Miniature scenes and creative photography</p>
+
+            <p>
+                © <span id="currentYear"></span>
+                Ruhaan Photography
+            </p>
+
+            <p>
+                Miniature scenes and creative photography
+            </p>
+
         </div>
     </footer>
 
@@ -288,15 +330,22 @@
         </button>
 
         <div class="lightbox-content">
-            
+
+            <img
+                id="lightboxImage"
+                src=""
+                alt=""
+            >
 
             <div class="lightbox-caption">
                 <h3 id="lightboxTitle"></h3>
                 <p id="lightboxDescription"></p>
             </div>
+
         </div>
     </div>
 
-    script.jsscript>
+    <script src="script.js"></script>
+
 </body>
 </html>

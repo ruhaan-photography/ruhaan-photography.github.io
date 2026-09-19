@@ -164,7 +164,7 @@ a {
     position: relative;
     z-index: 2;
     display: grid;
-    grid-template-columns: 0.92fr 1.08fr;
+    grid-template-columns: 0.8fr 1.2fr;
     gap: 70px;
     align-items: center;
     padding-block: 90px;
@@ -239,7 +239,8 @@ a {
 
 .slideshow {
     position: relative;
-    min-height: 570px;
+    aspect-ratio: 16 / 9;
+    min-height: auto;
     overflow: hidden;
     border: 10px solid rgba(255, 255, 255, 0.72);
     border-radius: 24px;
@@ -372,28 +373,16 @@ a {
     padding: 105px 0;
     background:
         linear-gradient(
-            rgba(0,0,0,0.45),
-            rgba(0,0,0,0.45)
+        rgba(255,250,242,0.80),
+        rgba(255,250,242,0.80)
         ),
-        url("images/DSC_0872.JPG");
+        url("images/20260607_170025.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
 }
 
 /* Gallery Section Text */
-
-.gallery-section .container {
-    background: rgba(255, 250, 242, 0.92);
-    backdrop-filter: blur(12px);
-    border-radius: 24px;
-    padding: 50px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.20);
-    width: min(1100px, calc(100% - 80px));
-}
-
-
 
 .gallery-section .section-heading h2,
 .gallery-section .section-heading p,

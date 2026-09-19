@@ -238,11 +238,15 @@ a {
 /* Slideshow */
 
 .slideshow {
-    position: relative;
-    aspect-ratio: 16 / 9;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 3 / 4;
     min-height: auto;
+
+    margin-left: auto;
+
     overflow: hidden;
-    border: 10px solid rgba(255, 255, 255, 0.72);
+    border: 10px solid rgba(255,255,255,0.72);
     border-radius: 24px;
     background: #2a2824;
     box-shadow: var(--shadow);
@@ -368,15 +372,17 @@ a {
 /* Gallery */
 
 /* Gallery Background */
+
 .gallery-section {
-    position: relative;
     padding: 105px 0;
+
     background:
         linear-gradient(
-        rgba(255,250,242,0.80),
-        rgba(255,250,242,0.80)
+            rgba(0, 0, 0, 0.45),
+            rgba(0, 0, 0, 0.45)
         ),
         url("images/20260607_170025.jpg");
+
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -384,10 +390,17 @@ a {
 
 /* Gallery Section Text */
 
-.gallery-section .section-heading h2,
-.gallery-section .section-heading p,
+.gallery-section .section-heading h2 {
+    color: white;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.4);
+}
+
+.gallery-section .section-heading p {
+    color: rgba(255,255,255,0.9);
+}
+
 .gallery-section .eyebrow {
-    color: #ffffff;
+    color: var(--accent-light);
 }
 
 .gallery-se*tion .section-heading > p:last-chi*d {
@@ -422,12 +435,8 @@ a {
 }
 
 .filter-button {
-    padding: 10px 17px;
-    background: rgba(255,255,255,0.7);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    color: var(--text);
-    cursor: pointer;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid rgba(255,255,255,0.3);
 }
 
 .filter*button:hover,
@@ -659,9 +668,8 @@ a {
     }
 
     .hero-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1.2fr 0.8fr;
         gap: 50px;
-        padding-block: 75px;
     }
 
     .hero-content {

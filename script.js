@@ -1,325 +1,235 @@
-const menuButton = document.getElementById("menuButton");
-const navigationLinks = document.getElementById("navigationLinks");
+document.addEventListener("DOMContentLoaded", () => {
+    const menuButton = document.getElementById("menuButton");
+    const navigationLinks = document.getElementById("navigationLinks");
+    const currentYear = document.getElementById("currentYear");
 
-const filterButtons = document.querySelectorAll(".filter-button");
-const galleryItems = Array.from(
-    document.querySelectorAll(".gallery-item")
-);
+    if (currentYear) {
+        currentYear.textContent = new Date().getFullYear();
+    }
 
-const pagination = document.getElementById("pagination");
-const gallerySection = document.getElementById("gallery");
+    if (menuButton && navigationLinks) {
+        menuButton.addEventListener("click", () => {
+            const isOpen = navigationLinks.classList.toggle("open");
+            menuButton.setAttribute("aria-expanded", String(isOpen));
+        });
 
-const imageButtons = document.querySelectorAll(".image-button");
+        navigationLinks.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+                navigationLinks.classList.remove("open");
+                menuButton.setAttribute("aria-expanded", "false");
+            });
+        });
+    }
 
-const lightbox = document.getElementById("lightbox");
-const lightboxImage = document.getElementById("lightboxImage");
-const lightboxTitle = document.getElementById("lightboxTitle");
-const lightboxDescription = document.getElementById(
-    "lightboxDescription"
-);
-const lightboxClose = document.getElementById("lightboxClose");
+    // Hero slideshow
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const previousSlideButton = document.getElementById("previousSlide");
+    const nextSlideButton = document.getElementById("nextSlide");
+    const slideIndicators = document.getElementById("slideIndicators");
 
-const currentYear = document.getElementById("currentYear");
+    let activeSlideIndex = 0;
+    let slideshowTimer = null;
 
-/* Footer year */
+    function showSlide(index) {
+        if (!slides.length) return;
 
-currentYear.textContent = new Date().getFullYear();
+        activeSlideIndex = (index + slides.length) % slides.length;
 
-/* Mobile navigation */
+        slides.forEach((slide, slideIndex) => {
+            slide.classList.toggle("active", slideIndex === activeSlideIndex);
+        });
 
-menuButton.addEventListener("click", () => {
-    const menuIsOpen = navigationLinks.classList.toggle("open");
+        if (slideIndicators) {
+            slideIndicators.querySelectorAll(".slide-indicator").forEach((indicator, indicatorIndex) => {
+                indicator.classList.toggle("active", indicatorIndex === activeSlideIndex);
+            });
+        }
+    }
 
-    menuButton.setAttribute(
-        "aria-expanded",
-        String(menuIsOpen)
-    );
-});
+    function startSlideshow() {
+        window.clearInterval(slideshowTimer);
 
-navigationLinks.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-        navigationLinks.classList.remove("open");
-        menuButton.setAttribute("aria-expanded", "false");
-    });
-});
+        if (slides.length > 1) {
+            slideshowTimer = window.setInterval(() => {
+                showSlide(activeSlideIndex + 1);
+            }, 5000);
+        }
+    }
 
-/* Hero slideshow */
+    if (slideIndicators && slides.length) {
+        slides.forEach((slide, index) => {
+            const indicator = document.createElement("button");
+            indicator.type = "button";
+            indicator.className = "slide-indicator";
+            indicator.setAttribute("aria-label", `Show photograph ${index + 1}`);
+            indicator.addEventListener("click", () => {
+                showSlide(index);
+                startSlideshow();
+            });
+            slideIndicators.appendChild(indicator);
+        });
+    }
 
-const slides = Array.from(docum*nt.querySelectorAll(".slide"));
-co*st previousSlideButton =
-    docum*nt.getElementById("previousSlide")*
-const nextSlideButton =
-    docum*nt.getElementById("nextSlide");
-co*st slideIndicators =
-    document.*etElementById("slideIndicators");
-*let activeSlideIndex = 0;
-let slid*showTimer;
+    if (previousSlideButton) {
+        previousSlideButton.addEventListener("click", () => {
+            showSlide(activeSlideIndex - 1);
+            startSlideshow();
+        });
+    }
 
-function createSlideIn*icators() {
-    slideIndicators.in*erHTML = "";
+    if (nextSlideButton) {
+        nextSlideButton.addEventListener("click", () => {
+            showSlide(activeSlideIndex + 1);
+            startSlideshow();
+        });
+    }
 
-    slides.forEach((*lide, index) => {
-        const in*icator = document.createElement("b*tton");
+    showSlide(0);
+    startSlideshow();
 
-        indicator.type = *button";
-        indicator.classNa*e = "slide-indicator";
-        ind*cator.setAttribute(
-            "a*ia-label",
-            `Show photo*raph ${index + 1}`
-        );
+    // Gallery filtering and pagination
+    const filterButtons = Array.from(document.querySelectorAll(".filter-button"));
+    const galleryItems = Array.from(document.querySelectorAll(".gallery-item"));
+    const pagination = document.getElementById("pagination");
+    const gallerySection = document.getElementById("gallery");
+    const itemsPerPage = 6;
 
-   *    if (index === activeSlideIndex* {
-            indicator.classList*add("active");
+    let selectedFilter = "all";
+    let currentPage = 1;
+
+    function getFilteredItems() {
+        return galleryItems.filter((item) => {
+            return selectedFilter === "all" || item.dataset.category === selectedFilter;
+        });
+    }
+
+    function makePageButton(label, targetPage, isActive = false, isDisabled = false) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "page-button";
+        button.textContent = label;
+        button.disabled = isDisabled;
+
+        if (isActive) {
+            button.classList.add("active");
+            button.setAttribute("aria-current", "page");
         }
 
-        *ndicator.addEventListener("click",*() => {
-            showSlide(inde*);
-            restartSlideshow();*        });
+        button.addEventListener("click", () => {
+            if (button.disabled) return;
+            currentPage = targetPage;
+            renderGallery();
 
-        slideIndicators.appendChild(indicator);
-    });
-}
+            if (gallerySection) {
+                gallerySection.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        });
 
-function showSlide(index) {
-    if (index < 0) {
-        activeSlideIndex = slides.length - 1;
-    } else if (index >= slides.length) {
-        activeSlideIndex = 0;
-    } else {
-        activeSlideIndex = index;
+        return button;
     }
 
-    slides.forEach((slide, slideIndex) => {
-        slide.classList.toggle(
-            "active",
-            slideIndex === activeSlideIndex
+    function renderPagination(totalPages) {
+        if (!pagination) return;
+
+        pagination.innerHTML = "";
+
+        if (totalPages <= 1) return;
+
+        pagination.appendChild(
+            makePageButton("Previous", currentPage - 1, false, currentPage === 1)
         );
-    });
 
-    const indicators =
-        slideIndicators.querySelectorAll(".slide-indicator");
+        for (let page = 1; page <= totalPages; page += 1) {
+            pagination.appendChild(
+                makePageButton(String(page), page, page === currentPage, false)
+            );
+        }
 
-    indicators.forEach((indicator, indicatorIndex) => {
-        indicator.classList.toggle(
-            "active",
-            indicatorIndex === activeSlideIndex
+        pagination.appendChild(
+            makePageButton("Next", currentPage + 1, false, currentPage === totalPages)
         );
-    });
-}
-
-function startSlideshow() {
-    slideshowTimer = window.setInterval(() => {
-        showSlide(activeSlideIndex + 1);
-    }, 5500);
-}
-
-function restartSlideshow() {
-    window.clearInterval(slideshowTimer);
-    startSlideshow();
-}
-
-previousSlideButton.addEventListener("click", () => {
-    showSlide(activeSlideIndex - 1);
-    restartSlideshow();
-});
-
-nextSlideButton.addEventListener("click", () => {
-    showSlide(activeSlideIndex + 1);
-    restartSlideshow();
-});
-
-createSlideIndicators();
-showSlide(0);
-startSlideshow();
-
-/* Gallery filters and pagination */
-
-const itemsPerPage = 6;
-
-let selectedFilter = "all";
-let currentPage = 1;
-
-function getFilteredItems() {
-    return galleryItems.filter((item) => {
-        return (
-            selectedFilter === "all" ||
-            item.dataset.category === selectedFilter
-        );
-    });
-}
-
-function renderGallery() {
-    const filteredItems = getFilteredItems();
-    const totalPages = Math.max(
-        1,
-        Math.ceil(filteredItems.length / itemsPerPage)
-    );
-
-    if (currentPage > totalPages) {
-        currentPage = totalPages;
     }
 
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
+    function renderGallery() {
+        const filteredItems = getFilteredItems();
+        const totalPages = Math.max(1, Math.ceil(filteredItems.length / itemsPerPage));
 
-    galleryItems.forEach((item) => {
-        const matchesFilter =
-            selectedFilter === "all" ||
-            item.dataset.category === selectedFilter;
+        currentPage = Math.min(Math.max(currentPage, 1), totalPages);
 
-        item.classList.toggle(
-            "filter-hidden",
-            !matchesFilter
-        );
+        galleryItems.forEach((item) => {
+            item.classList.add("filter-hidden");
+            item.classList.add("pagination-hidden");
+        });
 
-        item.classList.add("pagination-hidden");
-    });
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const visibleItems = filteredItems.slice(startIndex, startIndex + itemsPerPage);
 
-    filteredItems
-        .slice(startIndex, endIndex)
-        .forEach((item) => {
+        visibleItems.forEach((item) => {
+            item.classList.remove("filter-hidden");
             item.classList.remove("pagination-hidden");
         });
 
-    renderPagination(totalPages);
-}
-
-function createPageButton(
-    label,
-    pageNumber,
-    options = {}
-) {
-    const button = document.createElement("button");
-
-    button.type = "button";
-    button.className = "page-button";
-    button.textContent = label;
-
-    if (options.active) {
-        button.classList.add("active");
-        button.setAttribute("aria-current", "page");
+        renderPagination(totalPages);
     }
 
-    if (options.disabled) {
-        button.disabled = true;
-    }
+    filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            selectedFilter = button.dataset.filter || "all";
+            currentPage = 1;
 
-    button.addEventListener("click", () => {
-        currentPage = pageNumber;
-        renderGallery();
-
-        gallerySection.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
+            filterButtons.forEach((item) => item.classList.remove("active"));
+            button.classList.add("active");
+            renderGallery();
         });
     });
 
-    return button;
-}
+    renderGallery();
 
-function renderPagination(totalPages) {
-    pagination.innerHTML = "";
+    // Gallery lightbox
+    const imageButtons = Array.from(document.querySelectorAll(".image-button"));
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImage = document.getElementById("lightboxImage");
+    const lightboxTitle = document.getElementById("lightboxTitle");
+    const lightboxDescription = document.getElementById("lightboxDescription");
+    const lightboxClose = document.getElementById("lightboxClose");
 
-    if (totalPages <= 1) {
-        return;
+    function closeLightbox() {
+        if (!lightbox) return;
+        lightbox.classList.remove("visible");
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("lightbox-open");
+        if (lightboxImage) lightboxImage.src = "";
     }
 
-    pagination.appendChild(
-        createPageButton(
-            "Previous",
-            currentPage - 1,
-            {
-                disabled: currentPage === 1
+    imageButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            if (!lightbox || !lightboxImage) return;
+
+            lightboxImage.src = button.dataset.image || "";
+            lightboxImage.alt = button.dataset.title || "Selected photograph";
+            if (lightboxTitle) lightboxTitle.textContent = button.dataset.title || "";
+            if (lightboxDescription) {
+                lightboxDescription.textContent = button.dataset.description || "";
             }
-        )
-    );
 
-    for (let page = 1; page <= totalPages; page += 1) {
-        pagination.appendChild(
-            createPageButton(
-                String(page),
-                page,
-                {
-                    active: page === currentPage
-                }
-            )
-        );
-    }
-
-    pagination.appendChild(
-        createPageButton(
-            "Next",
-            currentPage + 1,
-            {
-                disabled: currentPage === totalPages
-            }
-        )
-    );
-}
-
-filterButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-        selectedFilter = button.dataset.filter;
-        currentPage = 1;
-
-        filterButtons.forEach((item) => {
-            item.classList.remove("active");
+            lightbox.classList.add("visible");
+            lightbox.setAttribute("aria-hidden", "false");
+            document.body.classList.add("lightbox-open");
+            if (lightboxClose) lightboxClose.focus();
         });
-
-        button.classList.add("active");
-
-        renderGallery();
     });
-});
 
-renderGallery();
+    if (lightboxClose) {
+        lightboxClose.addEventListener("click", closeLightbox);
+    }
 
-/* Gallery lightbox */
+    if (lightbox) {
+        lightbox.addEventListener("click", (event) => {
+            if (event.target === lightbox) closeLightbox();
+        });
+    }
 
-function openLightbox(button) {
-    lightboxImage.src = button.dataset.image;
-    lightboxImage.alt = button.dataset.title;
-
-    lightboxTitle.textContent = button.dataset.title;
-    lightboxDescription.textContent =
-        button.dataset.description;
-
-    lightbox.classList.add("visible");
-    lightbox.setAttribute("aria-hidden", "false");
-
-    document.body.classList.add("lightbox-open");
-
-    lightboxClose.focus();
-}
-
-function closeLightbox() {
-    lightbox.classList.remove("visible");
-    lightbox.setAttribute("aria-hidden", "true");
-
-    document.body.classList.remove("lightbox-open");
-
-    lightboxImage.src = "";
-}
-
-imageButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-        openLightbox(button);
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeLightbox();
     });
-});
-
-lightboxClose.addEventListener("click", closeLightbox);
-
-lightbox.addEventListener("click", (event) => {
-    if (event.target === lightbox) {
-        closeLightbox();
-    }
-});
-
-document.addEventListener("keydown", (event) => {
-    if (
-        event.key === "Escape" &&
-        lightbox.classList.contains("visible")
-    ) {
-        closeLightbox();
-    }
 });

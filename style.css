@@ -118,23 +118,20 @@ a {
     display: flex;
     align-items: center;
     overflow: hidden;
+
     background:
-        radial-gradient(
-            circle at 8% 15%,
-            rgba(249, 192, 148, 0.5),
-            transparent 36%
-        ),
-        radial-gradient(
-            circle at 92% 82%,
-            rgba(220, 150, 98, 0.28),
-            transparent 38%
-        ),
         linear-gradient(
-            135deg,
-            #fff5e7 0%,
-            #f9e8d4 50%,
-            #f2d7c1 100%
-        );
+            90deg,
+            rgba(10, 18, 12, 0.90) 0%,
+            rgba(10, 18, 12, 0.72) 38%,
+            rgba(10, 18, 12, 0.25) 70%,
+            rgba(10, 18, 12, 0.12) 100%
+        ),
+        url("images/20260816_154426-1.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .hero-decoration {
@@ -179,19 +176,22 @@ a {
     text-transform: uppercase;
 }
 
+.hero .eyebrow {
+    color: #f5c49f;
+}
+
 .hero h1 {
-    max-width: 620px;
-    margin: 0;
-    font-size: clamp(3.4rem, 7vw, 6rem);
-    line-height: 0.95;
-    letter-spacing: -0.055em;
+    color: #ffffff;
+    text-shadow: 0 3px 18px rgba(0, 0, 0, 0.35);
 }
 
 .hero-description {
-    max-width: 570px;
-    margin: 28px 0 34px;
-    color: #5f554b;
-    font-size: 1.08rem;
+    color: rgba(255, 255, 255, 0.84);
+}
+
+.hero .secondary-button {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.55);
 }
 
 .hero-actions {

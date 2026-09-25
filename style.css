@@ -123,10 +123,10 @@ a {
     background:
         linear-gradient(
             90deg,
-            rgba(8, 15, 10, 0.88) 0%,
-            rgba(8, 15, 10, 0.73) 34%,
-            rgba(8, 15, 10, 0.32) 62%,
-            rgba(8, 15, 10, 0.08) 100%
+            rgba(8, 15, 10, 0.90) 0%,
+            rgba(8, 15, 10, 0.76) 34%,
+            rgba(8, 15, 10, 0.30) 62%,
+            rgba(8, 15, 10, 0.07) 100%
         ),
         url("images/20260816_154426-2.jpg");
 
@@ -390,6 +390,21 @@ a {
     margin-top: -1px;
 }
 
+.gallery-section::after {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 80px;
+    background: linear-gradient(
+        to bottom,
+        rgba(10, 30, 21, 0.32),
+        transparent
+    );
+    pointer-events: none;
+    z-index: -1;
+}
+
+
 .gallery-section::before {
     content: "";
     position: absolute;
@@ -397,9 +412,9 @@ a {
     background:
         linear-gradient(
             180deg,
-            rgba(25, 31, 24, 0.30) 0%,
-            rgba(35, 31, 27, 0.18) 18%,
-            rgba(25, 25, 22, 0.24) 100%
+            rgba(18, 42, 31, 0.34) 0%,
+            rgba(42, 55, 43, 0.18) 35%,
+            rgba(27, 39, 31, 0.30) 100%
         ),
         url("images/20260417_121832.jpg");
     background-size: cover;
@@ -588,7 +603,7 @@ a {
 
 /* About */
 .about-section {
-    padding: 80px 0;
+    padding: 75px 0;
     background:
         radial-gradient(
             circle at 90% 10%,
@@ -604,6 +619,12 @@ a {
     grid-template-columns: 0.9fr 1.1fr;
     gap: 80px;
     align-items: start;
+}
+
+.about-content h2 {
+    max-width: 420px;
+    font-size: clamp(2.7rem, 4.5vw, 4rem);
+    line-height: 1.08;
 }
 
 .about-description {

@@ -409,12 +409,12 @@ a {
     margin-bottom: 36px;
 }
 
-.section-heading h2,
+.gallery-section .section-heading h2 {
+    font-size: clamp(2.4rem, 4vw, 3.4rem);
+}
+
 .about-content h2 {
-    margin: 0 0 16px;
     font-size: clamp(2.2rem, 5vw, 4rem);
-    line-height: 1.05;
-    letter-spacing: -0.04em;
 }
 
 .section-heading > p:last-child {
@@ -556,7 +556,9 @@ a {
     align-items: center;
     justify-content: center;
     color: #ffffff;
-    font-weight: 700;
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
 }
 
 /* About */

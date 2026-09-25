@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const galleryItems = Array.from(document.querySelectorAll(".gallery-item"));
     const pagination = document.getElementById("pagination");
     const gallerySection = document.getElementById("gallery");
-    const itemsPerPage = 6;
+    const itemsPerPage = 3;
 
     let selectedFilter = "all";
     let currentPage = 1;

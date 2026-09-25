@@ -549,6 +549,16 @@ a {
     cursor: not-allowed;
 }
 
+.page-ellipsis {
+    min-width: 26px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: 700;
+}
+
 /* About */
 
 .about-section {

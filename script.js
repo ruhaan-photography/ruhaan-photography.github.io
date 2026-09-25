@@ -136,82 +136,56 @@ document.addEventListener("DOMContentLoaded", () => {
         return ellipsis;
     }
 
-    function renderPagination(totalPages) {
-        if (!pagination) return;
-    
-        pagination.innerHTML = "";
-    
-        if (totalPages <= 1) return;
-    
-        // Previous button
-        pagination.appendChild(
-            makePageButton("‹", currentPage - 1, false, currentPage === 1)
-        );
-    
-        let startPage;
-        let endPage;
-    
-        if (totalPages <= 5) {
-            startPage = 1;
-            endPage = totalPages;
-        } else if (currentPage <= 4) {
-            startPage = 1;
-            endPage = 4;
-        } else if (currentPage >= totalPages - 2) {
-            startPage = totalPages - 3;
-            endPage = totalPages;
-        } else {
-            startPage = currentPage - 1;
-            endPage = currentPage + 2;
+   function renderPagination(totalPages) {
+    if (!pagination) return;
+
+    pagination.innerHTML = "";
+
+    if (totalPages <= 1) return;
+
+    pagination.appendChild(
+        makePageButton("‹", currentPage - 1, false, currentPage === 1)
+    );
+
+    const pagesToShow = new Set([
+        1,
+        totalPages,
+        currentPage - 1,
+        currentPage,
+        currentPage + 1
+    ]);
+
+    const validPages = Array.from(pagesToShow)
+        .filter((page) => page >= 1 && page <= totalPages)
+        .sort((a, b) => a - b);
+
+    let previousPage = 0;
+
+    validPages.forEach((page) => {
+        if (previousPage && page - previousPage > 1) {
+            pagination.appendChild(makeEllipsis());
         }
-    
-        // Show first page and leading ellipsis when needed
-        if (startPage > 1) {
-            pagination.appendChild(
-                makePageButton("1", 1, currentPage === 1)
-            );
-    
-            if (startPage > 2) {
-                pagination.appendChild(makeEllipsis());
-            }
-        }
-    
-        // Show maximum four consecutive page numbers
-        for (let page = startPage; page <= endPage; page += 1) {
-            pagination.appendChild(
-                makePageButton(
-                    String(page),
-                    page,
-                    page === currentPage
-                )
-            );
-        }
-    
-        // Show trailing ellipsis and final page when needed
-        if (endPage < totalPages) {
-            if (endPage < totalPages - 1) {
-                pagination.appendChild(makeEllipsis());
-            }
-    
-            pagination.appendChild(
-                makePageButton(
-                    String(totalPages),
-                    totalPages,
-                    currentPage === totalPages
-                )
-            );
-        }
-    
-        // Next button
+
         pagination.appendChild(
             makePageButton(
-                "›",
-                currentPage + 1,
-                false,
-                currentPage === totalPages
+                String(page),
+                page,
+                page === currentPage
             )
         );
-    }
+
+        previousPage = page;
+    });
+
+    pagination.appendChild(
+        makePageButton(
+            "›",
+            currentPage + 1,
+            false,
+            currentPage === totalPages
+        )
+    );
+}
 
     function renderGallery() {
         const filteredItems = getFilteredItems();

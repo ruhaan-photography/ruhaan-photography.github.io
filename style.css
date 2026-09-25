@@ -602,12 +602,13 @@ a {
 }
 
 /* About */
+
 .about-section {
-    padding: 75px 0;
+    padding: 55px 0;
     background:
         radial-gradient(
             circle at 90% 10%,
-            rgba(213, 101, 47, 0.18),
+            rgba(213, 101, 47, 0.16),
             transparent 34%
         ),
         #17241d;
@@ -616,25 +617,37 @@ a {
 
 .about-content {
     display: grid;
-    grid-template-columns: 0.9fr 1.1fr;
-    gap: 80px;
-    align-items: start;
+    grid-template-columns: 0.75fr 1.25fr;
+    gap: 60px;
+    align-items: center;
 }
 
 .about-content h2 {
     max-width: 420px;
-    font-size: clamp(2.7rem, 4.5vw, 4rem);
-    line-height: 1.08;
+    margin: 0;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    line-height: 1.05;
+}
+
+.about-section .eyebrow {
+    margin-bottom: 18px;
 }
 
 .about-description {
+    max-width: 680px;
     color: rgba(255, 255, 255, 0.82);
-    font-size: 1.05rem;
+    font-size: 1rem;
+    line-height: 1.65;
 }
 
-.about-description p:first-child {
-    margin-top: 0;
+.about-description p {
+    margin: 0;
 }
+
+.about-description p + p {
+    margin-top: 18px;
+}
+
 
 /* Footer */
 

@@ -70,7 +70,7 @@ a {
 }
 
 .navigation {
-    min-height: 82px;
+    min-height: 66px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -81,22 +81,26 @@ a {
     display: inline-flex;
     align-items: center;
     flex-shrink: 0;
-    color: var(--text);
+    height: 66px;
+    overflow: hidden;
     text-decoration: none;
 }
 
 .site-logo img {
     display: block;
-    width: 220px;
-    height: 62px;
+    width: 190px;
+    height: 72px;
     object-fit: contain;
     object-position: left center;
+    transform: scale(1.2);
+    transform-origin: left center;
 }
 
 .navigation-links {
     display: flex;
     align-items: center;
     gap: 28px;
+    height: 66px;
 }
 
 .navigation-links a {
@@ -810,15 +814,15 @@ a {
 
     /* Header and logo */
     .navigation {
-        min-height: 70px;
+        min-height: 60px;
         gap: 14px;
     }
 
     .site-logo img {
-        width: 165px;
-        height: 48px;
-        object-fit: contain;
-        object-position: left center;
+        width: 155px;
+        height: 62px;
+        transform: scale(1.15);
+        transform-origin: left center;
     }
 
     .menu-button {
@@ -837,7 +841,7 @@ a {
 
     .navigation-links {
         position: absolute;
-        top: 70px;
+        top: 60px;
         left: 0;
         right: 0;
         display: none;

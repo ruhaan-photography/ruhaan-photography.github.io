@@ -426,12 +426,12 @@ a {
     position: absolute;
     inset: 0;
     z-index: -2;
-    background-image: url("images/Ninja/20261004_151956.jpg");
+    background-image: url("images/Ninja/YOUR-CURRENT-BACKGROUND.jpg");
     background-size: cover;
-    background-position: center 46%;
+    background-position: center;
     background-repeat: no-repeat;
-    filter: saturate(1.04) contrast(1.02) brightness(0.82);
-    transform: scale(1.01);
+    filter: saturate(1.08) contrast(1.04) brightness(0.94);
+    transform: none;
 }
 
 .gallery-section::after {
@@ -439,14 +439,7 @@ a {
     position: absolute;
     inset: 0;
     z-index: -1;
-    background:
-        linear-gradient(
-            180deg,
-            rgba(8, 27, 18, 0.16) 0%,
-            rgba(8, 27, 18, 0.08) 60%,
-            rgba(19, 39, 29, 0.55) 88%,
-            #13271d 100%
-        );
+    background: rgba(5, 22, 14, 0.12);
     pointer-events: none;
 }
 
@@ -650,17 +643,28 @@ a {
     margin-top: -1px;
     padding: 58px 0;
     background:
-        radial-gradient(
-            circle at 88% 20%,
-            rgba(99, 138, 108, 0.14),
-            transparent 36%
-        ),
         linear-gradient(
             180deg,
             #13271d 0%,
             #102219 100%
         );
     color: #ffffff;
+}
+
+.about-section::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -80px;
+    height: 80px;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(19, 39, 29, 0.42) 45%,
+        #13271d 100%
+    );
+    pointer-events: none;
 }
 
 .about-content {

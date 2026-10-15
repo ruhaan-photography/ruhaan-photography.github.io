@@ -698,10 +698,10 @@ a {
 
 /* Footer */
 .site-footer {
-    padding: 20px 0;
+    padding: 24px 0;
     background: #0b1811;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.72);
+    color: rgba(255, 255, 255, 0.78);
 }
 
 .footer-content {

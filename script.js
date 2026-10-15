@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     showSlide(0);
     startSlideshow();
 
-    // Gallery filtering and pagination
+    // Gallery filtering, random order and pagination
     const filterButtons = Array.from(document.querySelectorAll(".filter-button"));
     const galleryItems = Array.from(document.querySelectorAll(".gallery-item"));
     const pagination = document.getElementById("pagination");
@@ -97,8 +97,62 @@ document.addEventListener("DOMContentLoaded", () => {
     let selectedFilter = "all";
     let currentPage = 1;
 
+    function shuffle(items) {
+        const shuffled = [...items];
+
+        for (let index = shuffled.length - 1; index > 0; index -= 1) {
+            const randomIndex = Math.floor(Math.random() * (index + 1));
+            [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
+        }
+
+        return shuffled;
+    }
+
+    function buildMixedGalleryOrder(items) {
+        const categoryGroups = new Map();
+
+        items.forEach((item) => {
+            const category = item.dataset.category || "other";
+
+            if (!categoryGroups.has(category)) {
+                categoryGroups.set(category, []);
+            }
+
+            categoryGroups.get(category).push(item);
+        });
+
+        const shuffledGroups = new Map(
+            Array.from(categoryGroups.entries()).map(([category, categoryItems]) => {
+                return [category, shuffle(categoryItems)];
+            })
+        );
+
+        const categoryOrder = shuffle(Array.from(shuffledGroups.keys()));
+        const mixedItems = [];
+        let itemsRemaining = true;
+
+        while (itemsRemaining) {
+            itemsRemaining = false;
+
+            categoryOrder.forEach((category) => {
+                const categoryItems = shuffledGroups.get(category);
+
+                if (categoryItems && categoryItems.length) {
+                    mixedItems.push(categoryItems.shift());
+                    itemsRemaining = true;
+                }
+            });
+        }
+
+        return mixedItems;
+    }
+
+    // A fresh, mixed order is created once on every page load or refresh.
+    // The order then remains stable while the visitor filters and paginates.
+    const galleryOrder = buildMixedGalleryOrder(galleryItems);
+
     function getFilteredItems() {
-        return galleryItems.filter((item) => {
+        return galleryOrder.filter((item) => {
             return selectedFilter === "all" || item.dataset.category === selectedFilter;
         });
     }
@@ -117,6 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         button.addEventListener("click", () => {
             if (button.disabled) return;
+
             currentPage = targetPage;
             renderGallery();
 
@@ -136,56 +191,47 @@ document.addEventListener("DOMContentLoaded", () => {
         return ellipsis;
     }
 
-   function renderPagination(totalPages) {
-    if (!pagination) return;
+    function renderPagination(totalPages) {
+        if (!pagination) return;
 
-    pagination.innerHTML = "";
+        pagination.innerHTML = "";
 
-    if (totalPages <= 1) return;
-
-    pagination.appendChild(
-        makePageButton("‹", currentPage - 1, false, currentPage === 1)
-    );
-
-    const pagesToShow = new Set([
-        1,
-        totalPages,
-        currentPage - 1,
-        currentPage,
-        currentPage + 1
-    ]);
-
-    const validPages = Array.from(pagesToShow)
-        .filter((page) => page >= 1 && page <= totalPages)
-        .sort((a, b) => a - b);
-
-    let previousPage = 0;
-
-    validPages.forEach((page) => {
-        if (previousPage && page - previousPage > 1) {
-            pagination.appendChild(makeEllipsis());
-        }
+        if (totalPages <= 1) return;
 
         pagination.appendChild(
-            makePageButton(
-                String(page),
-                page,
-                page === currentPage
-            )
+            makePageButton("‹", currentPage - 1, false, currentPage === 1)
         );
 
-        previousPage = page;
-    });
+        const pagesToShow = new Set([
+            1,
+            totalPages,
+            currentPage - 1,
+            currentPage,
+            currentPage + 1
+        ]);
 
-    pagination.appendChild(
-        makePageButton(
-            "›",
-            currentPage + 1,
-            false,
-            currentPage === totalPages
-        )
-    );
-}
+        const validPages = Array.from(pagesToShow)
+            .filter((page) => page >= 1 && page <= totalPages)
+            .sort((firstPage, secondPage) => firstPage - secondPage);
+
+        let previousPage = 0;
+
+        validPages.forEach((page) => {
+            if (previousPage && page - previousPage > 1) {
+                pagination.appendChild(makeEllipsis());
+            }
+
+            pagination.appendChild(
+                makePageButton(String(page), page, page === currentPage)
+            );
+
+            previousPage = page;
+        });
+
+        pagination.appendChild(
+            makePageButton("›", currentPage + 1, false, currentPage === totalPages)
+        );
+    }
 
     function renderGallery() {
         const filteredItems = getFilteredItems();

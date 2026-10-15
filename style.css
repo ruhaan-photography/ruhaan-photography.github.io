@@ -442,9 +442,10 @@ a {
     background:
         linear-gradient(
             180deg,
-            rgba(8, 27, 18, 0.26) 0%,
-            rgba(8, 27, 18, 0.16) 52%,
-            rgba(8, 27, 18, 0.42) 100%
+            rgba(8, 27, 18, 0.16) 0%,
+            rgba(8, 27, 18, 0.08) 60%,
+            rgba(19, 39, 29, 0.55) 88%,
+            #13271d 100%
         );
     pointer-events: none;
 }
@@ -646,14 +647,19 @@ a {
 .about-section {
     position: relative;
     z-index: 1;
+    margin-top: -1px;
     padding: 58px 0;
     background:
         radial-gradient(
             circle at 88% 20%,
-            rgba(99, 138, 108, 0.16),
+            rgba(99, 138, 108, 0.14),
             transparent 36%
         ),
-        #13271d;
+        linear-gradient(
+            180deg,
+            #13271d 0%,
+            #102219 100%
+        );
     color: #ffffff;
 }
 
@@ -698,9 +704,15 @@ a {
 
 /* Footer */
 .site-footer {
+    margin-top: -1px;
     padding: 24px 0;
-    background: #0b1811;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background:
+        linear-gradient(
+            180deg,
+            #102219 0%,
+            #08130d 100%
+        );
+    border-top: 0;
     color: rgba(255, 255, 255, 0.78);
 }
 

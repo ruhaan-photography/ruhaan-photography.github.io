@@ -416,7 +416,7 @@ a {
 .gallery-section {
     position: relative;
     isolation: isolate;
-    padding: 88px 0 82px;
+    padding: 60px 0 72px;
     overflow: hidden;
     margin-top: -1px;
 }
@@ -429,15 +429,15 @@ a {
     background:
         linear-gradient(
             180deg,
-            rgba(246, 241, 229, 0.24) 0%,
-            rgba(24, 48, 37, 0.18) 48%,
-            rgba(12, 29, 22, 0.48) 100%
+            rgba(246, 241, 229, 0.12) 0%,
+            rgba(24, 48, 37, 0.14) 48%,
+            rgba(12, 29, 22, 0.44) 100%
         ),
         url("images/Ninja/20260524_173445.jpg");
     background-size: cover;
     background-position: center 42%;
     background-repeat: no-repeat;
-    filter: blur(7px) saturate(0.88);
+    filter: blur(4px) saturate(0.95);
     transform: scale(1.04);
 }
 
@@ -576,7 +576,7 @@ a {
 .image-caption span {
     display: -webkit-box;
     overflow: hidden;
-    color: #687269;
+    color: #59655d;
     font-size: 0.9rem;
     line-height: 1.45;
     -webkit-box-orient: vertical;
@@ -593,11 +593,12 @@ a {
     max-width: 100%;
     margin: 42px auto 0;
     padding: 10px 14px;
-    background: rgba(255, 250, 242, 0.42);
     border: 1px solid rgba(255, 255, 255, 0.40);
     border-radius: 999px;
-    box-shadow: 0 12px 30px rgba(12, 24, 18, 0.16);
     backdrop-filter: blur(10px);
+    background: rgba(255, 250, 242, 0.28);
+    border-color: rgba(255, 255, 255, 0.28);
+    box-shadow: 0 10px 24px rgba(12, 24, 18, 0.12);    
 }
 
 .page-button {
@@ -956,6 +957,7 @@ a {
     .image-caption {
         min-height: 90px;
         padding: 16px 17px 18px;
+        border-top: 1px solid rgba(23, 36, 29, 0.08);
     }
 
     .pagination {

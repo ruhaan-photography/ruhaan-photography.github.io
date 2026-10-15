@@ -147,7 +147,7 @@ a {
 .hero {
     position: relative;
     overflow: hidden;
-    background: transparent;
+    background: #173d2d;
 }
 
 .hero-banner {
@@ -159,7 +159,7 @@ a {
     overflow: hidden;
     background:
         linear-gradient(rgba(4, 18, 11, 0.04), rgba(4, 18, 11, 0.10)),
-        url("images/Ninja/20260801_164717(1).jpg");
+        url("images/Minecraft/20260801_164717(1).jpg");
     background-size: cover;
     background-position: center 44%;
     color: #ffffff;
@@ -215,10 +215,11 @@ a {
 
 .hero-strips {
     display: flex;
-    width: 100%;
+    width: calc(100% + 2px);
+    margin-right: -2px;
     height: clamp(300px, 31vw, 405px);
     overflow: hidden;
-    background: transparent;
+    background: #173d2d;
 }
 
 .hero-strip {
@@ -235,13 +236,13 @@ a {
 }
 
 .hero-strip:first-child {
-    flex-basis: 21.6%;
+    flex-basis: 23.2%;
     margin-left: 0;
     clip-path: polygon(0 0, 100% 0, 87% 100%, 0 100%);
 }
 
 .hero-strip:last-child {
-    flex-basis: 21.6%;
+    flex-basis: 23.2%;
     clip-path: polygon(13% 0, 100% 0, 100% 100%, 0 100%);
 }
 
@@ -282,7 +283,8 @@ a {
     isolation: isolate;
     padding: 60px 0 70px;
     overflow: hidden;
-    margin-top: -1px;
+    margin-top: -2px;
+    box-shadow: inset 0 18px 26px -24px rgba(16, 41, 30, 0.38);
 }
 
 .gallery-section::before {

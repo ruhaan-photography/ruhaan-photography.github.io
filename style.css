@@ -424,21 +424,21 @@ a {
 .gallery-section::before {
     content: "";
     position: absolute;
-    inset: -20px;
+    inset: 0;
     z-index: -2;
     background:
         linear-gradient(
-            180deg,
-            rgba(246, 241, 229, 0.12) 0%,
-            rgba(24, 48, 37, 0.14) 48%,
-            rgba(12, 29, 22, 0.44) 100%
+            90deg,
+            rgba(12, 29, 22, 0.24) 0%,
+            rgba(12, 29, 22, 0.10) 48%,
+            rgba(12, 29, 22, 0.20) 100%
         ),
-        url("images/Ninja/20260524_173445.jpg");
+        url("images/Ninja/20261002_132027.jpg");
     background-size: cover;
-    background-position: center 42%;
+    background-position: center 43%;
     background-repeat: no-repeat;
-    filter: blur(4px) saturate(0.95);
-    transform: scale(1.04);
+    filter: saturate(1.12) contrast(1.04);
+    transform: none;
 }
 
 .gallery-section::after {
@@ -449,9 +449,9 @@ a {
     background:
         linear-gradient(
             180deg,
-            rgba(20, 39, 30, 0.18) 0%,
-            rgba(20, 39, 30, 0.03) 24%,
-            rgba(12, 29, 22, 0.20) 100%
+            rgba(15, 37, 27, 0.08) 0%,
+            rgba(15, 37, 27, 0.02) 55%,
+            rgba(10, 27, 19, 0.32) 100%
         );
     pointer-events: none;
 }
@@ -468,7 +468,7 @@ a {
 .filter-button {
     min-height: 48px;
     padding: 0 22px;
-    background: rgba(255, 250, 242, 0.94);
+    background: rgba(255, 250, 242, 0.97);
     border: 1px solid rgba(23, 36, 29, 0.14);
     border-radius: 999px;
     color: #17241d;
@@ -515,9 +515,9 @@ a {
     min-width: 0;
     overflow: hidden;
     background: #fffaf2;
-    border: 1px solid rgba(255, 255, 255, 0.44);
-    border-radius: 20px;
-    box-shadow: 0 18px 42px rgba(12, 24, 18, 0.20);
+    background: rgba(255, 250, 242, 0.97);
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    box-shadow: 0 20px 46px rgba(8, 22, 15, 0.28);
     transition:
         transform 180ms ease,
         box-shadow 180ms ease;
@@ -596,9 +596,9 @@ a {
     border: 1px solid rgba(255, 255, 255, 0.40);
     border-radius: 999px;
     backdrop-filter: blur(10px);
-    background: rgba(255, 250, 242, 0.28);
-    border-color: rgba(255, 255, 255, 0.28);
-    box-shadow: 0 10px 24px rgba(12, 24, 18, 0.12);    
+    background: rgba(245, 242, 229, 0.62);
+    border-color: rgba(255, 255, 255, 0.48);
+    backdrop-filter: blur(8px);
 }
 
 .page-button {
@@ -833,6 +833,15 @@ a {
 @media (max-width: 640px) {
     .container {
         width: min(100% - 28px, 1140px);
+    }
+    
+    .gallery-section::before {
+        background-position: 56% center;
+        filter: saturate(1.06) contrast(1.02);
+    }
+
+    .gallery-section::after {
+        background: rgba(10, 27, 19, 0.16);
     }
 
     /* Header and logo */

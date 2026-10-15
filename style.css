@@ -143,22 +143,22 @@ a {
     cursor: pointer;
 }
 
-/* Hero: tall banner and seamless overlapping photo strips */
+/* Hero: tall banner with seamless diagonal photo panels */
 .hero {
     position: relative;
     overflow: hidden;
-    background: #08130d;
+    background: transparent;
 }
 
 .hero-banner {
     position: relative;
     display: flex;
-    min-height: clamp(300px, 31vw, 410px);
+    min-height: clamp(330px, 34vw, 440px);
     align-items: center;
     justify-content: center;
     overflow: hidden;
     background:
-        linear-gradient(rgba(4, 18, 11, 0.06), rgba(4, 18, 11, 0.13)),
+        linear-gradient(rgba(4, 18, 11, 0.04), rgba(4, 18, 11, 0.10)),
         url("images/Ninja/20261002_132027.jpg");
     background-size: cover;
     background-position: center 44%;
@@ -168,17 +168,16 @@ a {
 
 .hero-brand-panel {
     display: flex;
-    width: min(92%, 980px);
+    max-width: calc(100% - 30px);
     flex-direction: column;
     align-items: center;
-    gap: 11px;
-    padding: 20px 30px 18px;
-    background: rgba(5, 14, 9, 0.86);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 16px;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.32);
+    gap: 12px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
     text-align: center;
-    backdrop-filter: blur(5px);
+    backdrop-filter: none;
 }
 
 .hero-title-bar,
@@ -186,32 +185,37 @@ a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.34);
-    border-radius: 8px;
+    width: fit-content;
+    max-width: 100%;
+    background: rgba(0, 0, 0, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
 }
 
 .hero-title-bar {
-    max-width: 100%;
-    padding: 5px 24px 8px;
+    padding: 9px 24px 12px;
+    border-radius: 12px;
     font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(2.25rem, 5.2vw, 5.2rem);
+    font-size: clamp(2rem, 4.2vw, 4.2rem);
     font-style: italic;
     line-height: 1;
-    letter-spacing: -0.045em;
+    letter-spacing: -0.04em;
     white-space: nowrap;
 }
 
 .hero-tagline-bar {
     padding: 8px 18px;
+    border-radius: 9px;
     color: #f5c49f;
-    font-size: clamp(0.76rem, 1.25vw, 1rem);
+    font-size: clamp(0.72rem, 1.15vw, 0.95rem);
     font-weight: 800;
-    letter-spacing: 0.17em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
 }
 
 .hero-strips {
     display: flex;
+    width: 100%;
     height: clamp(300px, 31vw, 405px);
     overflow: hidden;
     background: transparent;
@@ -219,39 +223,35 @@ a {
 
 .hero-strip {
     position: relative;
-    z-index: 1;
-    flex: 1 1 20%;
+    flex: 0 0 23.2%;
     min-width: 0;
-    margin-left: -3.2%;
+    margin-left: -4%;
     overflow: hidden;
     background: transparent;
-    clip-path: polygon(14% 0, 100% 0, 86% 100%, 0 100%);
+    clip-path: polygon(13% 0, 100% 0, 87% 100%, 0 100%);
     color: #ffffff;
     text-decoration: none;
     isolation: isolate;
 }
 
 .hero-strip:first-child {
-    z-index: 5;
+    flex-basis: 21.6%;
     margin-left: 0;
-    clip-path: polygon(0 0, 100% 0, 86% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 87% 100%, 0 100%);
 }
 
-.hero-strip:nth-child(2) { z-index: 4; }
-.hero-strip:nth-child(3) { z-index: 3; }
-.hero-strip:nth-child(4) { z-index: 2; }
-.hero-strip:nth-child(5) { z-index: 1; }
-
 .hero-strip:last-child {
-    clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%);
+    flex-basis: 21.6%;
+    clip-path: polygon(13% 0, 100% 0, 100% 100%, 0 100%);
 }
 
 .hero-strip img {
-    width: calc(100% + 30%);
+    position: absolute;
+    inset: 0;
+    width: 100%;
     height: 100%;
-    margin-left: -15%;
     object-fit: cover;
-    transform: scale(1.02);
+    transform: scale(1.18);
     transition: transform 520ms ease, filter 250ms ease;
 }
 
@@ -266,7 +266,7 @@ a {
 }
 
 .hero-strip:hover img {
-    transform: scale(1.07);
+    transform: scale(1.23);
     filter: saturate(1.08) contrast(1.03);
 }
 
@@ -305,10 +305,10 @@ a {
     z-index: -1;
     background: linear-gradient(
         180deg,
-        rgba(8, 27, 18, 0.04) 0%,
+        rgba(8, 27, 18, 0.03) 0%,
         rgba(8, 27, 18, 0.03) 58%,
-        rgba(23, 61, 45, 0.18) 75%,
-        rgba(23, 61, 45, 0.58) 90%,
+        rgba(23, 61, 45, 0.17) 74%,
+        rgba(23, 61, 45, 0.54) 89%,
         #173d2d 100%
     );
     pointer-events: none;
@@ -511,20 +511,14 @@ a {
 .about-section {
     position: relative;
     z-index: 1;
-    padding: 58px 0;
     isolation: isolate;
-    background:
-        radial-gradient(
-            circle at 88% 18%,
-            rgba(126, 171, 137, 0.16),
-            transparent 38%
-        ),
-        linear-gradient(
-            180deg,
-            #173d2d 0%,
-            #143426 38%,
-            #10291e 100%
-        );
+    padding: 58px 0;
+    background: linear-gradient(
+        180deg,
+        #173d2d 0%,
+        #143426 42%,
+        #10291e 100%
+    );
     color: #ffffff;
 }
 
@@ -887,10 +881,11 @@ a {
     }
 }
 
+
 /* Refined hero responsive layout */
 @media (max-width: 920px) {
     .hero-banner {
-        min-height: 300px;
+        min-height: 310px;
     }
 
     .hero-strips {
@@ -898,34 +893,32 @@ a {
     }
 
     .hero-title-bar {
-        font-size: clamp(2.1rem, 7vw, 4rem);
+        font-size: clamp(1.9rem, 6vw, 3.5rem);
     }
 }
 
 @media (max-width: 640px) {
     .hero-banner {
-        min-height: 245px;
+        min-height: 255px;
         background-position: center;
     }
 
     .hero-brand-panel {
-        width: calc(100% - 28px);
+        max-width: calc(100% - 22px);
         gap: 8px;
-        padding: 15px 12px 14px;
-        border-radius: 12px;
     }
 
     .hero-title-bar {
-        max-width: 100%;
-        padding: 5px 10px 7px;
-        font-size: clamp(1.65rem, 8.7vw, 2.65rem);
+        padding: 7px 11px 9px;
+        border-radius: 9px;
+        font-size: clamp(1.45rem, 8vw, 2.35rem);
         white-space: nowrap;
     }
 
     .hero-tagline-bar {
         padding: 7px 10px;
-        font-size: 0.65rem;
-        letter-spacing: 0.105em;
+        font-size: 0.62rem;
+        letter-spacing: 0.09em;
     }
 
     .hero-strips {
@@ -948,8 +941,7 @@ a {
     }
 
     .hero-strip img {
-        width: 100%;
-        margin-left: 0;
+        position: static;
         transform: none;
     }
 }

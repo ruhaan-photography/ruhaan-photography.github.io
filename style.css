@@ -57,32 +57,27 @@ a {
     margin-inline: auto;
 }
 
-/* Header */
-
-.site-header {
-    position: sticky;
+/* Hero overlay navigation */
+.hero-topbar {
+    position: absolute;
     top: 0;
-    z-index: 100;
-    background: rgba(11, 31, 22, 0.97);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.18);
-    backdrop-filter: blur(14px);
-}
-
-.navigation {
-    min-height: 76px;
+    left: 50%;
+    z-index: 10;
+    min-height: 92px;
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
     gap: 24px;
+    transform: translateX(-50%);
 }
 
 .header-label {
     justify-self: start;
-    color: rgba(255, 255, 255, 0.67);
+    color: rgba(255, 255, 255, 0.82);
     font-size: 0.7rem;
     font-weight: 800;
     letter-spacing: 0.18em;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
     text-transform: uppercase;
     white-space: nowrap;
 }
@@ -90,26 +85,25 @@ a {
 .site-logo {
     justify-self: center;
     display: inline-flex;
-    height: 66px;
+    height: 78px;
     align-items: center;
     justify-content: center;
     padding: 0;
     overflow: hidden;
     background: transparent;
     border: 0;
-    border-radius: 0;
     box-shadow: none;
     text-decoration: none;
 }
 
 .site-logo img {
     display: block;
-    width: 192px;
-    height: 64px;
+    width: 225px;
+    height: 76px;
     object-fit: contain;
     object-position: center;
     filter: brightness(0) invert(1);
-    opacity: 0.96;
+    opacity: 0.98;
     transform: scale(1.04);
     transform-origin: center;
 }
@@ -124,10 +118,11 @@ a {
 .navigation-links a {
     position: relative;
     padding: 9px 0;
-    color: rgba(255, 255, 255, 0.88);
+    color: rgba(255, 255, 255, 0.94);
     font-size: 0.94rem;
     font-weight: 700;
     text-decoration: none;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.85);
     transition: color 180ms ease;
 }
 
@@ -156,7 +151,7 @@ a {
     display: none;
     padding: 8px 12px;
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.22);
     border-radius: 8px;
     color: #ffffff;
     cursor: pointer;
@@ -171,65 +166,19 @@ a {
 
 .hero-banner {
     position: relative;
-    display: flex;
     min-height: clamp(360px, 37vw, 500px);
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+    overflow: visible;
     background:
-        linear-gradient(rgba(4, 18, 11, 0.04), rgba(4, 18, 11, 0.10)),
+        linear-gradient(
+            180deg,
+            rgba(3, 14, 9, 0.62) 0%,
+            rgba(3, 14, 9, 0.26) 18%,
+            rgba(3, 14, 9, 0.02) 42%,
+            transparent 100%
+        ),
         url("images/Ninja/20261002_132027.jpg");
     background-size: cover;
     background-position: center 44%;
-    color: #ffffff;
-    text-decoration: none;
-}
-
-.hero-brand-panel {
-    display: flex;
-    max-width: calc(100% - 30px);
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    padding: 0;
-    background: transparent;
-    border: 0;
-    box-shadow: none;
-    text-align: center;
-    backdrop-filter: none;
-}
-
-.hero-title-bar,
-.hero-tagline-bar {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: fit-content;
-    max-width: 100%;
-    background: rgba(0, 0, 0, 0.88);
-    border: 1px solid rgba(255, 255, 255, 0.10);
-    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
-}
-
-.hero-title-bar {
-    padding: 9px 24px 12px;
-    border-radius: 12px;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(1.9rem, 3.9vw, 3.9rem);
-    font-style: italic;
-    line-height: 1;
-    letter-spacing: -0.04em;
-    white-space: nowrap;
-}
-
-.hero-tagline-bar {
-    padding: 8px 18px;
-    border-radius: 9px;
-    color: #f5c49f;
-    font-size: clamp(0.72rem, 1.15vw, 0.95rem);
-    font-weight: 800;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
 }
 
 .hero-strips {
@@ -973,9 +922,10 @@ a {
     }
 }
 
-/* Centred header responsive layout */
+/* Hero overlay navigation responsive layout */
 @media (max-width: 920px) {
-    .navigation {
+    .hero-topbar {
+        min-height: 84px;
         grid-template-columns: 1fr auto 1fr;
     }
 
@@ -985,8 +935,8 @@ a {
     }
 
     .site-logo img {
-        width: 176px;
-        height: 59px;
+        width: 198px;
+        height: 68px;
     }
 
     .navigation-links {
@@ -995,9 +945,9 @@ a {
 }
 
 @media (max-width: 640px) {
-    .navigation {
-        position: relative;
-        min-height: 66px;
+    .hero-topbar {
+        top: 0;
+        min-height: 76px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -1009,13 +959,12 @@ a {
     }
 
     .site-logo {
-        justify-self: auto;
-        height: 58px;
+        height: 68px;
     }
 
     .site-logo img {
-        width: 164px;
-        height: 54px;
+        width: 180px;
+        height: 64px;
         transform: none;
     }
 
@@ -1026,25 +975,28 @@ a {
         align-items: center;
         justify-content: center;
         padding: 0;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(4, 18, 11, 0.52);
+        border: 1px solid rgba(255, 255, 255, 0.24);
         border-radius: 8px;
         color: #ffffff;
+        backdrop-filter: blur(8px);
     }
 
     .navigation-links {
         position: absolute;
-        top: 66px;
-        left: 0;
-        right: 0;
+        top: 70px;
+        left: 14px;
+        right: 14px;
         display: none;
         flex-direction: column;
         align-items: stretch;
         gap: 0;
-        padding: 12px 20px 20px;
-        background: #0b1f16;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.10);
-        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.24);
+        padding: 10px 18px 16px;
+        background: rgba(7, 24, 16, 0.96);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 10px;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.28);
+        backdrop-filter: blur(14px);
     }
 
     .navigation-links.open {
@@ -1053,7 +1005,7 @@ a {
 
     .navigation-links a {
         padding: 12px 0;
-        color: rgba(255, 255, 255, 0.90);
+        color: rgba(255, 255, 255, 0.94);
     }
 
     .navigation-links a::after {
